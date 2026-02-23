@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer">
+
+      <div className="footer-quote">
+        Shops & Services That Matter to You!
+      </div>
+
       <div className="footer-container">
 
         {/* Column 1 */}

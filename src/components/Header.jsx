@@ -32,9 +32,9 @@ export default function Header() {
         </nav>
 
         {/* Profile */}
-        <div className="profile">
+        {/* <div className="profile">
           K
-        </div>
+        </div> */}
 
       </div>
     </header>

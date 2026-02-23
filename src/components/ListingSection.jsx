@@ -8,7 +8,7 @@ export default function ListingSection({ title, items }) {
       {/* Header */}
       <div className="listing-header">
         <h2>{title}</h2>
-        <span className="see-all">See All</span>
+        {/* <span className="see-all">See All</span> */}
       </div>
 
       {/* Cards Grid */}
