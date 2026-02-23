@@ -4,6 +4,7 @@ import Hero from './Hero.jsx'
 import CategorySection from './CategorySection.jsx'
 import ListingCard from './ListingCard.jsx'
 import ListingSection from './ListingSection.jsx'
+import ScrollToTop from './ScrollToTop.jsx'
 
 export {
     Header, 
@@ -11,7 +12,8 @@ export {
     Hero, 
     CategorySection, 
     ListingCard, 
-    ListingSection
+    ListingSection, 
+    ScrollToTop
 
 
 }

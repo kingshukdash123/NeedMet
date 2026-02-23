@@ -1,7 +1,12 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../style/Header.css";
 
 export default function Header() {
+  
+  const navigate = useNavigate();
+  const logoClick = () => {
+    navigate('/')
+  }
   return (
     <header className="header">
       <div className="header-container">
@@ -9,7 +14,7 @@ export default function Header() {
         {/* Logo */}
         <div className="logo">
           <span className="logo-dot"></span>
-          <h2>NeedMate</h2>
+          <h2 onClick={logoClick}>NeedMate</h2>
         </div>
 
         {/* Navigation */}

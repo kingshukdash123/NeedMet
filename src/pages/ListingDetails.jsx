@@ -11,7 +11,13 @@ function ListingDetails() {
   )
 
   if (!selectedListing) {
-    return <h2>Listing Not Found</h2>;
+    return (
+      <>
+        <Header />
+        <h2 style={{textAlign: 'center', margin: '5rem 0 5rem'}}>Listing Not Found</h2>
+        <Footer />
+      </>
+    )
   }
 
   return (
