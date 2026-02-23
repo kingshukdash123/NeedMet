@@ -1,12 +1,13 @@
 import "../style/ListingCard.css";
 
 
-export default function ListingCard({ item }) {
+export default function ListingCard({item}) {
+  console.log(item)
   return (
     <div className="listing-card">
       {/* Image */}
       <div className="listing-image">
-        <img src={item.image} alt={item.name} />
+        <img src={item.images[0].thumbUrl} alt={item.name} />
       </div>
 
       {/* Content */}
@@ -17,7 +18,7 @@ export default function ListingCard({ item }) {
 
         <div className="listing-location">
           <i className="fa-solid fa-location-dot loc-icon"></i>
-          <span>{item.location}</span>
+          <span>{item.address}</span>
         </div>
 
         <div className="listing-rating">

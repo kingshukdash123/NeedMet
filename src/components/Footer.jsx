@@ -50,8 +50,8 @@ export default function Footer() {
           </div>
 
           <div className="store-buttons">
-            <button className="store-btn"><i class="fa-brands fa-google-play"></i>Google Play</button>
-            <button className="store-btn"><i class="fa-brands fa-apple"></i>App Store</button>
+            <button className="store-btn"><i className="fa-brands fa-google-play"></i>Google Play</button>
+            <button className="store-btn"><i className="fa-brands fa-apple"></i>App Store</button>
           </div>
         </div>
 

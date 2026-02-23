@@ -14,7 +14,7 @@ export default function ListingSection({ title, items }) {
       {/* Cards Grid */}
       <div className="listing-grid">
         {items.map((item) => (
-          <ListingCard key={item.id} item={item} />
+          <ListingCard key={item.listingId} item={item} />
         ))}
       </div>
 

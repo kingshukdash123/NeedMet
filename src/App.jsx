@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { Header, Footer, Hero, CategorySection, ListingCard, ListingSection } from './components'
-import { listings } from './data/listings.js'
+import { listing } from './data/listing_dummy_data.js'
 
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <Header />
       <Hero />
       <CategorySection />
-      <ListingSection title="Newly Added" items={listings}/>
-      <ListingSection title="Recommended" items={listings}/>
+      <ListingSection title="Newly Added" items={listing}/>
+      <ListingSection title="Recommended" items={listing}/>
       <Footer />
     </>
   )
