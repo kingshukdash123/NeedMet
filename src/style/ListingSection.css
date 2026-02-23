@@ -1,0 +1,36 @@
+.listing-section {
+  padding: 50px 80px;
+}
+
+/* Header */
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listing-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 2rem 0;
+}
+
+.see-all {
+  font-size: 1.2rem;
+  color: #0f766e;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+/* Grid */
+.listing-grid {
+  margin: 0 2rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}

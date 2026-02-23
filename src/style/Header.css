@@ -1,0 +1,74 @@
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 15px 80px;
+  box-sizing: border-box;
+  position: sticky;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logo-dot {
+  width: 14px;
+  height: 14px;
+  border: 3px solid #0f766e;
+  border-radius: 50%;
+}
+
+.logo h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0f766e;
+}
+
+/* Active link styling */
+.nav-link.active {
+  color: #0f766e;
+  font-weight: 600;
+}
+
+/* Profile */
+.profile {
+  width: 38px;
+  height: 38px;
+  background-color: #0f766e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+}
