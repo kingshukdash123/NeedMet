@@ -4,11 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
+import { Home, ListingDetails } from './pages'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
+  },
+  {
+    path: "/Listing/:id",
+    element: <ListingDetails />,
   },
 ])
 

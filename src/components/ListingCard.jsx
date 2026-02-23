@@ -1,10 +1,16 @@
 import "../style/ListingCard.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListingCard({item}) {
-  console.log(item)
+
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(`/listing/${item.listingId}`)
+  }
+
   return (
-    <div className="listing-card">
+    <div className="listing-card" onClick={handleClick}>
       {/* Image */}
       <div className="listing-image">
         <img src={item.images[0].thumbUrl} alt={item.name} />
