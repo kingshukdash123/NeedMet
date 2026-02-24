@@ -6,12 +6,10 @@ function Home() {
 
   return (
     <>
-      <Header />
       <Hero />
       <CategorySection />
       <ListingSection title="Newly Added" items={listing}/>
       <ListingSection title="Recommended" items={listing}/>
-      <Footer />
     </>
   )
 }

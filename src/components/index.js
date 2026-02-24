@@ -6,6 +6,9 @@ import ListingCard from './ListingCard.jsx'
 import ListingSection from './ListingSection.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
 import ImageSlider from './ImageSlider.jsx'
+import ListingBasicInfo from './ListingBasicInfo.jsx'
+import InfoTable from './InfoTable.jsx'
+import RatingSection from './RatingSection.jsx'
 
 export {
     Header, 
@@ -15,7 +18,8 @@ export {
     ListingCard, 
     ListingSection, 
     ScrollToTop, 
-    ImageSlider
-
-
+    ImageSlider, 
+    ListingBasicInfo, 
+    InfoTable, 
+    RatingSection
 }

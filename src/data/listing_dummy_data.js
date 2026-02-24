@@ -27,7 +27,7 @@ export const listing = [
 
     isClaimed: true,
     ownerId: "owner123",
-    ownerName: "Arjun Mukherjee",
+    ownerName: "Kingshuk Dash",
     claimStatus: "approved",
     verifiedBy: "admin01",
 
@@ -43,7 +43,7 @@ export const listing = [
     ],
 
     reviews: 52,
-    ratingCount: 52,
+    ratingCount: 57,
     rating: 4.4,
 
     since: 2019,
@@ -81,7 +81,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L002",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -162,7 +162,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L003",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -243,7 +243,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L004",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -324,7 +324,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L005",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -405,7 +405,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L006",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -486,7 +486,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L007",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",
@@ -567,7 +567,7 @@ export const listing = [
     }
   }, 
   {
-    listingId: "L001",
+    listingId: "L008",
     contributionId: "C001",
     name: "Urban Brew Cafe",
     address: "Park Street, Kolkata, India",

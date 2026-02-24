@@ -1,13 +1,30 @@
-import { Header, Footer } from '../components'
+import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection } from '../components'
 import { listing } from '../data/listing_dummy_data.js'
 import { useParams } from 'react-router-dom';
+import '../style/ListingDetails.css'
 
 
 function ListingDetails() {
+
   const {id} = useParams(); 
 
   const selectedListing = listing.find(
     (item) => item.listingId === id
+  )
+
+  const detaisRows = Object.entries(selectedListing.details).map(
+    ([details, info]) => [
+      details, 
+      info.toString()
+    ]
+  )
+
+  const openingHoursRows = Object.entries(selectedListing.openHours).map(
+    ([day, details]) => [
+      day, 
+      details.open, 
+      details.close
+    ]
   )
 
   if (!selectedListing) {
@@ -22,21 +39,29 @@ function ListingDetails() {
 
   return (
     <>
-      <Header />
-      <div style={{ padding: "50px" }}>
-      <h1>{selectedListing.name}</h1>
-      <p>{selectedListing.address}</p>
-      <p>{selectedListing.description}</p>
+      <ListingBasicInfo selectedListing={selectedListing}/>
+      <div className="listing-details">
+        <InfoTable 
+          title='Detailed Information'
+          columns={["Details", "Info"]}
+          rows={detaisRows}
+        />
+        <InfoTable 
+          title='Opening Hours'
+          columns={['Day', 'Open', 'Close']}
+          rows={openingHoursRows}
+        />
+      </div>
 
-      <img
-        src={selectedListing.images[0].fullUrl}
-        alt={selectedListing.name}
-        width="400"
+      <RatingSection className='rating-section'
+        rating={selectedListing.rating}
+        reviews={selectedListing.reviews}
+        ratingCount={selectedListing.ratingCount}
+        ratingStats={selectedListing.ratingStats}
       />
 
-      <p>⭐ {selectedListing.rating} ({selectedListing.reviews} reviews)</p>
-    </div>
-      <Footer />
+      <ListingSection title="Similar Listings" items={listing}/>
+      <ListingSection title="Recommended" items={listing}/>
     </>
   )
 }
