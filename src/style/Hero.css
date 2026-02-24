@@ -116,17 +116,6 @@
     font-size: 10px;
   }
 
-  .hero-image-card {
-    width: 100%; /* full width */
-    max-width: 100%; /* remove any max-width limit */
-    padding: 15px; 
-    box-sizing: border-box; /* ensure padding doesn't overflow */
-  }
-
-  .hero-image-card img {
-    height: auto;
-    width: 100%; /* stretch image to full width */ /* maintain aspect ratio */
-  }
 }
 
 @media (max-width: 750px) {
@@ -142,15 +131,4 @@
     width: 100%;
   }
 
-  .hero-image-card {
-    width: 70%; /* full width */
-    max-width: 100%; /* remove any max-width limit */
-    padding: 15px; 
-    box-sizing: border-box; /* ensure padding doesn't overflow */
-  }
-
-  .hero-image-card img {
-    height: auto;
-    width: 100%; /* stretch image to full width */ /* maintain aspect ratio */
-  }
 }

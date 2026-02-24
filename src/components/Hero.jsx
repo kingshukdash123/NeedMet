@@ -1,4 +1,5 @@
 import "../style/Hero.css";
+import ImageSlider from "./ImageSlider";
 
 export default function Hero() {
   const tags = [
@@ -41,9 +42,7 @@ export default function Hero() {
 
         {/* RIGHT SIDE */}
         <div className="hero-right">
-          <div className="hero-image-card">
-            <img src='https://img.freepik.com/free-vector/natural-landscape-wallpaper-concept_23-2148650600.jpg?semt=ais_user_personalization&w=740&q=80' alt="Marketplace Illustration" />
-          </div>
+          <ImageSlider width="90%"/>
         </div>
 
       </div>
