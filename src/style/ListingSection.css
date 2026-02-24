@@ -30,7 +30,21 @@
 /* Grid */
 .listing-grid {
   margin: 0 2rem;
-  display: flex;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
   flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .listing-section {
+    padding: 40px 40px;
+  }
+
+  .listing-grid {
+  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  gap: 1rem;
+}
+
 }

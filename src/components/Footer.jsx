@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="footer-column">
           <h4>ABOUT US</h4>
           <ul>
-            <li><Link to="/about">About NeedMate</Link></li>
+            <li>About NeedMet</li>
             <li>Careers</li>
             <li>Blog</li>
             <li>Help</li>

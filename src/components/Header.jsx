@@ -1,45 +1,37 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../style/Header.css";
 
 export default function Header() {
-  
   const navigate = useNavigate();
-  const logoClick = () => {
-    navigate('/')
-  }
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const logoClick = () => navigate('/');
+
   return (
     <header className="header">
       <div className="header-container">
         
         {/* Logo */}
-        <div className="logo">
+        <div className="logo" onClick={logoClick}>
           <span className="logo-dot"></span>
-          <h2 onClick={logoClick}>NeedMate</h2>
+          <h2>NeedMate</h2>
+        </div>
+
+        {/* Hamburger */}
+        <div className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
 
         {/* Navigation */}
-        <nav className="nav">
-          <NavLink to="/" className="nav-link">
-            Home
-          </NavLink>
-
-          <NavLink to="/categories" className="nav-link">
-            Categories
-          </NavLink>
-
-          <NavLink to="/about" className="nav-link">
-            About Us
-          </NavLink>
-
-          <NavLink to="/contact" className="nav-link">
-            Contact
-          </NavLink>
+        <nav className={`nav ${menuOpen ? "active" : ""}`}>
+          <NavLink to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/categories" className="nav-link" onClick={() => setMenuOpen(false)}>Categories</NavLink>
+          <NavLink to="/about" className="nav-link" onClick={() => setMenuOpen(false)}>About Us</NavLink>
+          <NavLink to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</NavLink>
         </nav>
-
-        {/* Profile */}
-        {/* <div className="profile">
-          K
-        </div> */}
 
       </div>
     </header>
