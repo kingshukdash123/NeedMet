@@ -42,7 +42,7 @@ export default function Hero() {
 
         {/* RIGHT SIDE */}
         <div className="hero-right">
-          <ImageSlider width="90%"/>
+          <ImageSlider width="90%" slide={true}/>
         </div>
 
       </div>

@@ -1,8 +1,8 @@
 import '../style/InfoTable.css'
 
-function InfoTable({ title, columns, rows }) {
+function InfoTable({ title, columns, rows , style}) {
   return (
-    <div className="info-section">
+    <div className={`info-section`} style={style}>
       <h2>{title}</h2>
 
       <table className="info-table">
