@@ -21,6 +21,11 @@
   cursor: pointer;
 }
 
+.logo img {
+  height: 50px;
+  width: 50px;
+}
+
 .logo-dot {
   width: 14px;
   height: 14px;

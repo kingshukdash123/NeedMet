@@ -27,9 +27,9 @@ export default function ListingCard({item}) {
           <span>{item.address}</span>
         </div>
 
-        <div className="listing-rating">
+        <div className="listing-card-rating">
           <i className="fa-solid fa-star star-icon"></i>
-          <span>{item.rating}</span>
+          <span>{item.rating} ({item.ratingCount} reviews)</span>
         </div>
       </div>
     </div>

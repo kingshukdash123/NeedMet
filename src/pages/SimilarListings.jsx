@@ -1,0 +1,10 @@
+import { ListingSection } from "../components"
+import { listing } from '../data/listing_dummy_data.js'
+
+export default function SimilarListings() {
+    return (
+        <>
+            <ListingSection title='Similar Listings' items={listing} see_all_navigate='false'/>
+        </>
+    )
+}

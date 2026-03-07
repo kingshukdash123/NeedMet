@@ -9,6 +9,7 @@ import ImageSlider from './ImageSlider.jsx'
 import ListingBasicInfo from './ListingBasicInfo.jsx'
 import InfoTable from './InfoTable.jsx'
 import RatingSection from './RatingSection.jsx'
+import PreviewImage from './PreviewImage.jsx'
 
 export {
     Header, 
@@ -21,5 +22,6 @@ export {
     ImageSlider, 
     ListingBasicInfo, 
     InfoTable, 
-    RatingSection
+    RatingSection, 
+    PreviewImage
 }

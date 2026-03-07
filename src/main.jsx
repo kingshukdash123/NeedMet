@@ -4,25 +4,22 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
-import { Home, ListingDetails } from './pages'
+import { 
+  Home, 
+  ListingDetails, 
+  NewlyAddedListings, 
+  RecommendedListings, 
+  SimilarListings, 
+} from './pages'
 
 const router = createBrowserRouter(
-  // [
-    // <ScrollToTop />, 
-    // {
-    //   path: "/",
-    //   element: <Home />,
-    // },
-    // {
-    //   path: "/Listing/:id",
-    //   element: <ListingDetails />,
-    // },
-  // ]
-
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route path='' element={<Home />} /> 
       <Route path='listing/:id' element={<ListingDetails />} />
+      <Route path='newlyAddedListings' element={<NewlyAddedListings/>}/>
+      <Route path='recommendedListings' element={<RecommendedListings/>}/>
+      <Route path='similarListings' element={<SimilarListings/>}/>
     </Route>
   )
 

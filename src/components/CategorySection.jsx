@@ -19,7 +19,10 @@ export default function CategorySection() {
     <section className="category-section">
       <div className="category-container">
 
-        <h2 className="category-title">Categories</h2>
+        <div className="category-container-top">
+          <h2 className="category-title">Categories</h2>
+          <a className="see-all">See All ❯</a>
+        </div>
 
         <div className="category-grid">
           {categories.map((item, index) => (

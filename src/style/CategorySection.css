@@ -2,15 +2,16 @@
   padding: 50px 80px;
 }
 
-/* .category-container {
-  max-width: 1200px;
-  margin: 0 auto;
-} */
+.category-container-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 
 .category-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
   color: #222;
 }
 

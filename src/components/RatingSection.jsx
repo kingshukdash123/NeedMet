@@ -1,4 +1,3 @@
-import React from "react";
 import '../style/RatingSection.css'
 
 function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }) {
@@ -21,7 +20,6 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
       <div className="rating-section">
         <div className="rating-section-top">
           <h2>Ratings & Reviews</h2>
-          <button>Share Your Review</button>
         </div>
 
         <div className="rating-body">
@@ -87,6 +85,8 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
             </div>
           </div>
         </div>
+
+        <button className='share-your-review-btn'>Share Your Review</button>
       </div>
 
       <div className="reviews-container">

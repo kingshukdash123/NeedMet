@@ -1,15 +1,35 @@
 import "../style/ListingSection.css";
 import { ListingCard } from "./index.js";
+import { Link } from "react-router-dom";
 
-export default function ListingSection({ title, items }) {
+
+function HeaderWithSeeAll({title, see_all_navigate}) {
+  return (
+    <div className="listing-header">
+      <h2>{title}</h2>
+      <Link to={see_all_navigate} className="see-all">See All ❯</Link>
+    </div>
+  )
+}
+
+function HeaderWithOutSeeAll({title}) {
+  return (
+    <div className="listing-header-without-see-all">
+      <h2>{title}</h2>
+    </div>
+  )
+}
+
+export default function ListingSection({ title, items=[], see_all_navigate }) {
   return (
     <section className="listing-section">
       
       {/* Header */}
-      <div className="listing-header">
-        <h2>{title}</h2>
-        {/* <span className="see-all">See All</span> */}
-      </div>
+      {
+        see_all_navigate === 'false' ? 
+          <HeaderWithOutSeeAll title={title}/> : 
+          <HeaderWithSeeAll title={title} see_all_navigate={see_all_navigate}/>
+      }
 
       {/* Cards Grid */}
       <div className="listing-grid">

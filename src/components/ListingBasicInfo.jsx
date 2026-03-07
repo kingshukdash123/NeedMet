@@ -1,14 +1,32 @@
-import verified_icon from '../assets/verified_icon.png'
+import blueTick from '../assets/blueTick.svg'
+import facebook from '../assets/facebook.svg'
+import instagram from '../assets/instagram.svg'
+import linkedin from '../assets/linkedin.svg'
+import website from '../assets/website.svg'
+import whatsapp from '../assets/whatsapp.svg'
 import '../style/ListingBasicInfo.css'
 
 export default function ListingBasicInfo({ selectedListing, className = '' }) {
 
     const socialIcons = {
-        instagram: <i className="fa-brands fa-square-instagram"></i>,
-        facebook: <i className="fa-brands fa-facebook"></i>,
-        website: <i className="fa-solid fa-globe"></i>,
-        whatsapp: <i className="fa-brands fa-square-whatsapp"></i>,
-        linkedin: <i className="fa-brands fa-linkedin"></i>
+        instagram: <img src={instagram} alt="instagram" className='social-icons-img' />,
+        facebook: <img src={facebook} alt="facebook" className='social-icons-img'/>,
+        website: <img src={linkedin} alt="linkedin" className='social-icons-img' />,
+        whatsapp: <img src={website} alt="website" className='social-icons-img' />,
+        linkedin: <img src={whatsapp} alt="whatsapp" className='social-icons-img' />
+    }
+
+    const renderStars = (count) => {
+        const stars = []
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <i
+                    key={i}
+                    className={`fa-solid fa-star ${i <= count ? 'active' : ''}`}
+                ></i>
+            )
+        }
+        return stars
     }
 
     return (
@@ -22,14 +40,11 @@ export default function ListingBasicInfo({ selectedListing, className = '' }) {
             {/* Rating */}
             <div className="listing-rating">
                 <div className="five-stars">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    {renderStars(Math.trunc(selectedListing.rating))}
                 </div>
                 <span className="rating-value">
-                    {selectedListing.rating} ({selectedListing.ratingCount} reviews)
+                    <span>{selectedListing.rating} </span>
+                    ({selectedListing.ratingCount} reviews)
                 </span>
             </div>
 
@@ -69,7 +84,7 @@ export default function ListingBasicInfo({ selectedListing, className = '' }) {
                         <p className="owner-name">{selectedListing.ownerName}</p>
                         <p className="owner-role">
                             Contributor
-                            <img src={verified_icon} alt="verified" />
+                            <img src={blueTick} alt="verified" />
                         </p>
                     </div>
                 </div>

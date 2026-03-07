@@ -8,8 +8,8 @@ function Home() {
     <>
       <Hero />
       <CategorySection />
-      <ListingSection title="Newly Added" items={listing}/>
-      <ListingSection title="Recommended" items={listing}/>
+      <ListingSection title="Newly Added" items={listing} see_all_navigate='/newlyAddedListings'/>
+      <ListingSection title="Recommended" items={listing} see_all_navigate='/recommendedListings'/>
     </>
   )
 }

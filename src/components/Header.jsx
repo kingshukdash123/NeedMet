@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../style/Header.css";
+import companyLogo from '../assets/companyLogo.png'
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Header() {
         
         {/* Logo */}
         <div className="logo" onClick={logoClick}>
-          <span className="logo-dot"></span>
+          <img src={companyLogo} alt="logo" />
           <h2>NeedMate</h2>
         </div>
 

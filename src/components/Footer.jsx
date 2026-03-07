@@ -47,7 +47,7 @@ export default function Footer() {
         {/* Column 4 */}
         <div className="footer-column">
           <h4>FOLLOW US</h4>
-          <div className="social-icons">
+          <div className="footer-social-icons">
             <i className="fa-brands fa-facebook-f"></i>
             <i className="fa-brands fa-instagram"></i>
             <i className="fa-brands fa-youtube"></i>
