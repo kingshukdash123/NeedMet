@@ -1,5 +1,5 @@
 import { ListingSection } from "../components"
-import { listing } from '../data/listing_dummy_data.js'
+import { listing } from '../data/draft/listing_dummy_data.js'
 
 export default function SimilarListings() {
     return (

@@ -1,10 +1,23 @@
 import { ListingSection } from "../components"
-import { listing } from '../data/listing_dummy_data.js'
+// import { listing } from '../data/listing_dummy_data.js'
+import { useListings } from "../hooks/useListings";
+import { getAllListings } from "../services/firebase/firestore/listingService";
 
 export default function RecommendedListings() {
+    const { listings, loading, error} = useListings(getAllListings, 20)
+    
+    
+    if (loading) {
+        return <p>Loading listings...</p>;
+    }
+
+    if(error) {
+        return <p>Something went wrong, Come back later...</p>
+    }
+
     return (
         <>
-            <ListingSection title='Recommended Listings' items={listing} see_all_navigate='false'/>
+            <ListingSection title='Recommended Listings' items={listings} see_all_navigate='false'/>
         </>
     )
 }

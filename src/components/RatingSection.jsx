@@ -1,6 +1,7 @@
 import '../style/RatingSection.css'
+import { useReviews } from '../hooks/useReviews'
 
-function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }) {
+function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRatings = {}, listingId }) {
 
   const renderStars = (count) => {
     const stars = []
@@ -15,6 +16,20 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
     return stars
   }
 
+  const getRatingLabel = (rating) => {
+    if (rating >= 4.5) return "Excellent";
+    if (rating >= 4) return "Very Good";
+    if (rating >= 3) return "Good";
+    if (rating >= 2) return "Average";
+    return "Poor";
+  };
+
+
+  const overall = Math.round(((avgRatings.behaviour) + (avgRatings.quality)+ (avgRatings.value)) / 3)
+  const getPercent = (val) => Math.round(((val) / 5) * 100);
+
+  const { reviews, loading, hasMore, loadMore } = useReviews(listingId, 2);
+
   return (
     <div className="rating-review-section">
       <div className="rating-section">
@@ -27,12 +42,12 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
           
             {/* LEFT SIDE - Average Rating */}
             <div className="rating-overview">
-              <h1>Excellent</h1>
+              <h1>{ratingCount > 0 ? getRatingLabel(rating) : "No Ratings"}</h1>
               <div className="stars">
                 {"★".repeat(Math.round(rating))}
                 {"☆".repeat(5 - Math.round(rating))}
               </div>
-              <p>{ratingCount} Ratings & {reviews} Reviews</p>
+              <p>{ratingCount} Ratings & {review_count} Reviews</p>
             </div>
 
             <div className="rating-left-div"></div>
@@ -40,7 +55,7 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
             {/* MIDDLE SIDE - Breakdown */}
             <div className="rating-breakdown">
               {[5, 4, 3, 2, 1].map((star) => {
-                const count = ratingStats[star] || 0;
+                const count = ratingStats && ratingStats[star];
                 const percentage =
                   ratingCount > 0
                     ? (count / ratingCount) * 100
@@ -67,26 +82,55 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
 
             {/* RIGHT SIDE - Avg-rating */}
             <div className="avg-service-rating">
-              {
-                Object.entries(avgRatings).map(([key, val]) => (
-                  <div className="avg-rating-container" key={key}>
-                    <div 
-                      className="avg-rating-circle" 
-                      style={{ "--percent": `${val/5*100}` }}
-                    >
-                      <div className="avg-rating-circle-val">
-                        {val/5*100}%
-                      </div>
-                    </div>
-                    <span>{key}</span>
+              <div className="avg-rating-container" key='behaviour'>
+                <div 
+                  className="avg-rating-circle" 
+                  style={{ "--percent": `${getPercent(avgRatings.behaviour)}` }}
+                >
+                  <div className="avg-rating-circle-val">
+                    {getPercent(avgRatings.behaviour)}%
                   </div>
-                ))
-              }
+                </div>
+                <span>Behaviour</span>
+              </div>
+              <div className="avg-rating-container" key='quality'>
+                <div 
+                  className="avg-rating-circle" 
+                  style={{ "--percent": `${getPercent(avgRatings.quality)}` }}
+                >
+                  <div className="avg-rating-circle-val">
+                    {getPercent(avgRatings.quality)}%
+                  </div>
+                </div>
+                <span>Quality</span>
+              </div>
+              <div className="avg-rating-container" key='value'>
+                <div 
+                  className="avg-rating-circle" 
+                  style={{ "--percent": `${getPercent(avgRatings.value)}` }}
+                >
+                  <div className="avg-rating-circle-val">
+                    {getPercent(avgRatings.value)}%
+                  </div>
+                </div>
+                <span>Value</span>
+              </div>
+              <div className="avg-rating-container" key='overall'>
+                <div 
+                  className="avg-rating-circle" 
+                  style={{ "--percent": `${getPercent(overall)}` }}
+                >
+                  <div className="avg-rating-circle-val">
+                    {getPercent(overall)}%
+                  </div>
+                </div>
+                <span>Overall</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <button className='share-your-review-btn'>Share Your Review</button>
+        {/* <button className='share-your-review-btn'>Share Your Review</button> */}
       </div>
 
       <div className="reviews-container">
@@ -94,80 +138,56 @@ function RatingSection({ rating, reviews, ratingCount, ratingStats, avgRatings }
                 <h3>Reviews</h3>
             </div>
 
-            <div className="reviews-list">
+            {
+              <>
+                {
+                  !reviews.length ? (
+                    <div className="empty-review-text">No Reviews Yet</div>
+                  ) : (
+                    <div className="reviews-list">
+                      {
+                        reviews.map((review) => (
+                          <div className="review-card" key={review.id}>
+                            <div className="review-user">
+                              <div className="review-avatar">
+                                {review.userName[0]}
+                              </div>
 
-                {/* Review 1 */}
-                <div className="review-card">
-                    <div className="review-user">
-                        <div className="review-avatar">S</div>
+                              <div className="review-user-info">
+                                <p className="review-username">{review.userName}</p>
+                                <p className="review-text">{review.comment}</p>
+                              </div>
 
-                        <div className="review-user-info">
-                            <p className="review-username">Soumen Paul</p>
-                            <p className="review-text">
-                                Page layouts look better with something in each section. 
-                                Web page designers, content writers, and layout artists use lorem ipsum.
-                            </p>
-                        </div>
-                        
-                        <div className="review-date">
-                          <div className="review-stars">
-                              {renderStars(3)}
+                              <div className="review-date">
+                                <div className="review-stars">
+                                  {renderStars(review.rating)}
+                                </div>
+
+                                <span className="review-date">
+                                  {
+                                    review.createdAt?.seconds
+                                      ? new Date(review.createdAt.seconds * 1000).toLocaleDateString()
+                                      : "N/A"
+                                  }
+                                </span>
+                              </div>
                             </div>
-                            <span className="review-date">21/01/2025</span>
                           </div>
+                        ))
+                      }
                     </div>
-                </div>
+                  )
+                }
 
-                {/* Review 2 */}
-                <div className="review-card">
-                    <div className="review-user">
-                        <div className="review-avatar">S</div>
+                {hasMore && (
+                  <button onClick={loadMore} className="review-see-all-btn">
+                    Load More Reviews
+                  </button>
+                )}
+              </>
+            }
 
-                        <div className="review-user-info">
-                            <p className="review-username">Soumen Paul</p>
-                            <p className="review-text">
-                                Page layouts look better with something in each section. 
-                                Web page designers, content writers, and layout artists use lorem ipsum.
-                            </p>
-                        </div>
-                        
-                        <div className="review-date">
-                          <div className="review-stars">
-                              {renderStars(2)}
-                            </div>
-                            <span className="review-date">21/01/2025</span>
-                          </div>
-                    </div>
-                </div>
-
-                {/* Review 3 */}
-                <div className="review-card">
-                    <div className="review-user">
-                        <div className="review-avatar">S</div>
-
-                        <div className="review-user-info">
-                            <p className="review-username">Soumen Paul</p>
-                            <p className="review-text">
-                                Page layouts look better with something in each section. 
-                                Web page designers, content writers, and layout artists use lorem ipsum.
-                            </p>
-                        </div>
-                        
-                        <div className="review-date">
-                          <div className="review-stars">
-                              {renderStars(5)}
-                            </div>
-                            <span className="review-date">21/01/2025</span>
-                          </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div className="review-see-all-btn">
-              See All
-            </div>
+            
 
         </div>
     </div>

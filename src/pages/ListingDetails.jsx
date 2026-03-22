@@ -1,96 +1,115 @@
 import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection, ImageSlider, PreviewImage } from '../components'
-import { listing } from '../data/listing_dummy_data.js'
+// import { listing } from '../data/listing_dummy_data.js'
 import { useParams } from 'react-router-dom';
+import { useListings } from '../hooks/useListings.js';
 import '../style/ListingDetails.css'
+import { getListingById, getAllListings, getNewListings } from '../services/firebase/firestore/listingService.js';
 
 
 function ListingDetails() {
+  const { listings: newListings, loading: newLoading, error: newError} = useListings(getNewListings, 10)
+  const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(getAllListings, 10)
 
-  const {id} = useParams(); 
 
-  const selectedListing = listing.find(
-    (item) => item.listingId === id
-  )
 
-  const detaisRows = Object.entries(selectedListing.details).map(
+  const {listingId} = useParams(); 
+  if(!listingId) {
+    return <p>Something went wrong, Come back later...</p>
+  }
+  const { listings, loading, error} = useListings(getListingById, listingId)
+
+  if (loading) {
+    return <p>Loading listing...</p>;
+  }
+  
+  if (!listings) {
+    return (
+      <>
+        <h2 style={{textAlign: 'center', margin: '5rem 0 5rem'}}>Listing Not Found</h2>
+      </>
+    )
+  }
+  
+
+  const detailsRows = Object.entries(listings.details).map(
     ([details, info]) => [
       details, 
       info.toString()
     ]
   )
 
-  const openingHoursRows = Object.entries(selectedListing.openHours).map(
-    ([day, details]) => [
-      day, 
-      details.open, 
-      details.close
-    ]
-  )
+  const weekOrder = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ];
+  const openingHoursRows = weekOrder.map((day) => {
+    const details = listings.businessHours[day];
 
-    const images = [ 
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_719c5166-7702-4770-9f97-5be90964cb29.jpg?alt=media&token=4e8885a1-78bd-4b78-9de8-9a99d83c1450', 
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_0785d585-a979-4539-8b2a-e4a4a57e2551.jpg?alt=media&token=9ef49997-cd6a-4727-a9d1-0dba5fdc16b8', 
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_5d4c2553-3763-4bd5-bc41-429895a58d06.jpg?alt=media&token=cb53dd94-a3db-4e0d-9e4e-d1ed8ba08982',
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_0785d585-a979-4539-8b2a-e4a4a57e2551.jpg?alt=media&token=9ef49997-cd6a-4727-a9d1-0dba5fdc16b8',
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_719c5166-7702-4770-9f97-5be90964cb29.jpg?alt=media&token=4e8885a1-78bd-4b78-9de8-9a99d83c1450', 
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_0785d585-a979-4539-8b2a-e4a4a57e2551.jpg?alt=media&token=9ef49997-cd6a-4727-a9d1-0dba5fdc16b8', 
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_5d4c2553-3763-4bd5-bc41-429895a58d06.jpg?alt=media&token=cb53dd94-a3db-4e0d-9e4e-d1ed8ba08982',
-      'https://firebasestorage.googleapis.com/v0/b/startup20-5eaa7.firebasestorage.app/o/listings%2FSALEFTRkbVNN1SI4yGQT%2Ffull_0785d585-a979-4539-8b2a-e4a4a57e2551.jpg?alt=media&token=9ef49997-cd6a-4727-a9d1-0dba5fdc16b8',
-      ]
+    if (!details || details.isClosed) {
+      return [day, "Closed", "-"];
+    }
 
-  if (!selectedListing) {
-    return (
-      <>
-        <Header />
-        <h2 style={{textAlign: 'center', margin: '5rem 0 5rem'}}>Listing Not Found</h2>
-        <Footer />
-      </>
-    )
-  }
+    const slot = details.slots[0];
+
+    return [
+      day,
+      slot.open,
+      slot.close
+    ];
+  });
+
+  const imageList = listings.images.map(image => image.fullUrl);
+
 
   return (
     <>
       <div className="listing-details">
         <div className="listing-details-left">
-          <PreviewImage images={images}/>
+          <PreviewImage images={imageList}/>
           {/* <ImageSlider /> */}
 
           <div className="likes-contact">
             <div className="likes">
               <div className="likes-count">
-                <i class="fa-solid fa-thumbs-up"></i>
-                {selectedListing.likes}
+                <i className="fa-solid fa-thumbs-up"></i>
+                {listings.likes}
               </div>
 
               <div className="views-count">
-                ({selectedListing.views} Views)
+                ({listings.views} Views)
               </div>
             </div>
 
             <div className="contact">
               <button className='call'>
-                <i class="fa-solid fa-phone"></i>
+                <i className="fa-solid fa-phone"></i>
                 Call
               </button>
 
               <button className="direction">
-                <i class="fa-solid fa-location-arrow"></i>
+                <i className="fa-solid fa-location-arrow"></i>
                 Direction
               </button>
             </div>
           </div>
 
           <RatingSection
-            rating={selectedListing.rating}
-            reviews={selectedListing.reviews}
-            ratingCount={selectedListing.ratingCount}
-            ratingStats={selectedListing.ratingStats}
-            avgRatings={selectedListing.factorAvgRatings}
+            rating={listings.rating}
+            review_count={listings.reviews}
+            ratingCount={listings.ratingCount}
+            ratingStats={listings.ratingStats}
+            avgRatings={listings.factorAvgRatings}
+            listingId={listingId}
           />
         </div>
 
         <div className="listing-details-right">
-          <ListingBasicInfo selectedListing={selectedListing}/>
+          <ListingBasicInfo listings={listings}/>
 
           <InfoTable 
             title='Opening Hours'
@@ -102,26 +121,14 @@ function ListingDetails() {
           <InfoTable 
             title='Detailed Information'
             columns={["Details", "Info"]}
-            rows={detaisRows}
+            rows={detailsRows}
             style={{width: '100%'}}
           />
         </div>
       </div>
-      
-      {/* <div className="listing-details">
-        <RatingSection
-          rating={selectedListing.rating}
-          reviews={selectedListing.reviews}
-          ratingCount={selectedListing.ratingCount}
-          ratingStats={selectedListing.ratingStats}
-          avgRatings={selectedListing.factorAvgRatings}
-        />
 
-
-      </div> */}
-
-      <ListingSection title="Similar Listings" items={listing} see_all_navigate='/similarListings'/>
-      <ListingSection title="Recommended" items={listing} see_all_navigate='/recommendedListings'/>
+      <ListingSection title="Similar Listings" items={newListings} see_all_navigate='/similarListings'/>
+      <ListingSection title="Recommended" items={recommendedListings} see_all_navigate='/recommendedListings'/>
     </>
   )
 }

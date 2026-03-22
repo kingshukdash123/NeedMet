@@ -10,6 +10,7 @@ import ListingBasicInfo from './ListingBasicInfo.jsx'
 import InfoTable from './InfoTable.jsx'
 import RatingSection from './RatingSection.jsx'
 import PreviewImage from './PreviewImage.jsx'
+import HomeLoader from './Loader/HomeLoader.jsx'
 
 export {
     Header, 
@@ -23,5 +24,6 @@ export {
     ListingBasicInfo, 
     InfoTable, 
     RatingSection, 
-    PreviewImage
+    PreviewImage, 
+    HomeLoader
 }

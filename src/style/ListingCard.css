@@ -18,7 +18,8 @@
 /* Image Section */
 .listing-image {
   width: 100%;
-  height: 140px;
+  /* height: 140px; */
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 14px;
 }
@@ -39,6 +40,7 @@
   font-size: 11px;
   color: #9b9b9b;
   margin-bottom: 4px;
+  text-transform: capitalize;
 }
 
 /* Title */
@@ -47,6 +49,7 @@
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 6px 0;
+  text-transform: capitalize;
 }
 
 /* Location */

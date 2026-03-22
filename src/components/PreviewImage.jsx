@@ -1,20 +1,46 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import empty_thumb from "../assets/empty_thumb.png"
 import "../style/PreviewImage.css";
 
-export default function PreviewImage({ width="100%", images = [] }) {
+export default function PreviewImage({ width="100%", images = [empty_thumb] }) {
+  const previewRef = useRef(null);
+
+  const [isLeftDisabled, setIsLeftDisabled] = useState(true);
+  const [isRightDisabled, setIsRightDisabled] = useState(false);  
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextImage = () => {
-    setCurrentIndex((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
-    );
+
+const checkScrollPosition = () => {
+  const el = previewRef.current;
+  if (!el) return;
+
+  const buffer = 5;
+
+  const isAtStart = el.scrollLeft <= buffer;
+  const isAtEnd =
+    el.scrollLeft + el.clientWidth >= el.scrollWidth - buffer;
+
+  setIsLeftDisabled(isAtStart);
+  setIsRightDisabled(isAtEnd);
+};
+
+  useEffect(() => {
+    checkScrollPosition()
+  }, [images]);
+
+  const scrollLeft = () => {
+    previewRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    setTimeout(checkScrollPosition, 200); // wait for scroll
   };
 
-  const prevImage = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+  const scrollRight = () => {
+    previewRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    setTimeout(checkScrollPosition, 200);
   };
+
+  if(images.length == 0) {
+    images = [empty_thumb]
+  }
 
   return (
     <div 
@@ -29,12 +55,20 @@ export default function PreviewImage({ width="100%", images = [] }) {
       <div className="preview-container">
 
         <div>
-          <button className="preview-image-arrow prev-img-arrow-left">
+          <button 
+            onClick={scrollLeft}
+            disabled={isLeftDisabled}
+            className={`preview-image-arrow prev-img-arrow-left ${isLeftDisabled ? "prev-img-arrow-disabled" : ""}`}
+          >
             ❮
           </button>
         </div>
 
-        <div className="preview-wrapper">
+        <div 
+          className="preview-wrapper"
+          ref={previewRef}
+          onScroll={checkScrollPosition}
+        >
           {images.map((img, index) => (
             <img
             key={index}
@@ -42,13 +76,18 @@ export default function PreviewImage({ width="100%", images = [] }) {
             alt="preview"
             className={`preview ${currentIndex === index ? "preview-active" : ""}`}
             onClick={() => setCurrentIndex(index)}
+            onLoad={checkScrollPosition}
             />
           ))}
         </div>
 
         <div>
-          <button className="preview-image-arrow prev-img-arrow-right">
-            ❮
+          <button 
+            onClick={scrollRight}
+            disabled={isRightDisabled}
+            className={`preview-image-arrow prev-img-arrow-right ${isRightDisabled ? "prev-img-arrow-disabled" : ""}`}
+          >
+            ❯
           </button>
         </div>
 
