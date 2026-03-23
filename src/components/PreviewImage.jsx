@@ -8,6 +8,7 @@ export default function PreviewImage({ width="100%", images = [empty_thumb] }) {
   const [isLeftDisabled, setIsLeftDisabled] = useState(true);
   const [isRightDisabled, setIsRightDisabled] = useState(false);  
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasOverflow, setHasOverflow] = useState(false);
 
 
 const checkScrollPosition = () => {
@@ -22,6 +23,9 @@ const checkScrollPosition = () => {
 
   setIsLeftDisabled(isAtStart);
   setIsRightDisabled(isAtEnd);
+
+  const hasOverflow = el.scrollWidth > el.clientWidth;
+  setHasOverflow(hasOverflow);
 };
 
   useEffect(() => {
@@ -66,6 +70,11 @@ const checkScrollPosition = () => {
 
         <div 
           className="preview-wrapper"
+          style={
+            hasOverflow
+              ? { justifyContent: 'flex-start' }
+              : { justifyContent: 'center' }
+          }
           ref={previewRef}
           onScroll={checkScrollPosition}
         >
