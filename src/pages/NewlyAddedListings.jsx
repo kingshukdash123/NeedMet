@@ -16,7 +16,7 @@ export default function NewlyAddedListings() {
 
     return (
         <>
-            <ListingSection title='Newly Added Listings' items={listings} see_all_navigate='false'/>
+            <ListingSection title='Newly Added Listings' listings={listings} see_all_navigate='false'/>
         </>
     )
 }

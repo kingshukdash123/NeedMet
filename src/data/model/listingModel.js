@@ -118,6 +118,14 @@ class DaySchedule {
   }
 }
 
+const capitalizeWords = (str = "") =>
+  str
+    .trim()
+    .toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
 /* =========================
    Listing Class
 ========================= */
@@ -199,8 +207,8 @@ class Listing {
     return new Listing({
       listingId: json.listingId || "",
       contributionId: json.contributionId || "",
-      name: json.name || "",
-      address: json.address || "",
+      name: capitalizeWords(json.name) || "",
+      address: capitalizeWords(json.address) || "",
       description: json.description || "",
       details: json.details || {},
 
@@ -245,12 +253,12 @@ class Listing {
 
       social: json.social || {},
 
-      ratingStats: json.ratingStats || {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
+      ratingStats: {
+        '5': Number(json.ratingStats?.['5'] ?? 0),
+        '4': Number(json.ratingStats?.['4'] ?? 0),
+        '3': Number(json.ratingStats?.['3'] ?? 0),
+        '2': Number(json.ratingStats?.['2'] ?? 0),
+        '1': Number(json.ratingStats?.['1'] ?? 0),
       },
 
       factorAvgRatings: json.factorAvgRatings || {'behaviour': 0, 'quality': 0, 'value': 0},

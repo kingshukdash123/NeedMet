@@ -51,7 +51,7 @@ const formatData = (snap) => {
 
 const listingRef = collection(firestore, "listings");
 
-export const getAllListings = async (quantity) => {
+export const getAllListings = async ({ quantity }) => {
     try {
         console.log('[Api Call] getAllListings -> start');
 
@@ -68,7 +68,7 @@ export const getAllListings = async (quantity) => {
     }
 }
 
-export const getListingsByCategory = async (categoryId) => {
+export const getListingsByCategory = async ({ categoryId }) => {
     try {
         console.log('[Api Call] getListingsByCategory -> start');
 
@@ -85,7 +85,7 @@ export const getListingsByCategory = async (categoryId) => {
     }
 };
 
-export const getNewListings = async (quantity) => {
+export const getNewListings = async ({ quantity }) => {
     try {
         console.log('[Api Call] getNewListings -> start');
         
@@ -102,7 +102,7 @@ export const getNewListings = async (quantity) => {
     }
 };
 
-export const getRecommendedListings = async (quantity) => {
+export const getRecommendedListings = async ({ quantity }) => {
     try {
         console.log('[Api Call] getRecommendedListings -> start');
         

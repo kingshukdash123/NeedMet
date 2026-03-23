@@ -17,7 +17,7 @@ export default function RecommendedListings() {
 
     return (
         <>
-            <ListingSection title='Recommended Listings' items={listings} see_all_navigate='false'/>
+            <ListingSection title='Recommended Listings' listings={listings} see_all_navigate='false'/>
         </>
     )
 }

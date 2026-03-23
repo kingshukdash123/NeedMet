@@ -54,8 +54,8 @@ function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRati
 
             {/* MIDDLE SIDE - Breakdown */}
             <div className="rating-breakdown">
-              {[5, 4, 3, 2, 1].map((star) => {
-                const count = ratingStats && ratingStats[star];
+              {['5', '4', '3','2', '1'].map((star) => {
+                const count = ratingStats[star] || 0;
                 const percentage =
                   ratingCount > 0
                     ? (count / ratingCount) * 100

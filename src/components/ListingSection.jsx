@@ -20,7 +20,7 @@ function HeaderWithOutSeeAll({title}) {
   )
 }
 
-export default function ListingSection({ title, items=[], see_all_navigate }) {
+export default function ListingSection({ title, listings=[], see_all_navigate }) {
   return (
     <section className="listing-section">
       
@@ -33,8 +33,8 @@ export default function ListingSection({ title, items=[], see_all_navigate }) {
 
       {/* Cards Grid */}
       <div className="listing-grid">
-        {items.map((item) => (
-          <ListingCard key={item.listingId} item={item} />
+        {listings.map((listing) => (
+          <ListingCard key={listing.listingId} listing={listing} />
         ))}
       </div>
 

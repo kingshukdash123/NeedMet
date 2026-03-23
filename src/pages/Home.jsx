@@ -8,8 +8,8 @@ import { getNewListings, getAllListings } from '../services/firebase/firestore/l
 
 
 function Home() {
-  const { listings: newListings, loading: newLoading, error: newError} = useListings(getNewListings, 10)
-  const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(getAllListings, 10)
+  const { listings: newListings, loading: newLoading, error: newError} = useListings(getNewListings, {'quantity': 10})
+  const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(getAllListings, {'quantity': 10})
 
 
   if (newLoading || recommendedLoading) {
@@ -24,8 +24,8 @@ function Home() {
     <>
       <Hero />
       <CategorySection />
-      <ListingSection title="Newly Added" items={newListings} see_all_navigate='/newlyAddedListings'/>
-      <ListingSection title="Recommended" items={recommendedListings} see_all_navigate='/recommendedListings'/>
+      <ListingSection title="Newly Added" listings={newListings} see_all_navigate='/newlyAddedListings'/>
+      <ListingSection title="Recommended" listings={recommendedListings} see_all_navigate='/recommendedListings'/>
     </>
   )
 }

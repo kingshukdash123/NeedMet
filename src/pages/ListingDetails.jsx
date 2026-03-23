@@ -1,37 +1,59 @@
 import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection, ImageSlider, PreviewImage } from '../components'
 // import { listing } from '../data/listing_dummy_data.js'
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useListings } from '../hooks/useListings.js';
+import { useListingById } from '../hooks/useListingById.js';
 import '../style/ListingDetails.css'
 import { getListingById, getAllListings, getNewListings } from '../services/firebase/firestore/listingService.js';
 
 
 function ListingDetails() {
-  const { listings: newListings, loading: newLoading, error: newError} = useListings(getNewListings, 10)
-  const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(getAllListings, 10)
-
-
-
-  const {listingId} = useParams(); 
-  if(!listingId) {
-    return <p>Something went wrong, Come back later...</p>
-  }
-  const { listings, loading, error} = useListings(getListingById, listingId)
-
-  if (loading) {
-    return <p>Loading listing...</p>;
-  }
+  const location = useLocation();
+  const stateListing = location.state?.listing;
   
-  if (!listings) {
+  const { listingId } = useParams();
+
+  const { listing: fetchedListing, loading, error } = useListingById(listingId, !stateListing);
+
+  const listing = stateListing || fetchedListing;
+  const shouldFetch = !!listing;
+
+  const { listings: newListings, loading: newLoading, error: newError} = useListings(
+    getNewListings, 
+    {'quantity':10}, 
+    shouldFetch
+  )
+  const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(
+    getAllListings, 
+    {'quantity':10}, 
+    shouldFetch
+  )
+
+  if (error || newError || recommendedError) {
     return (
-      <>
-        <h2 style={{textAlign: 'center', margin: '5rem 0 5rem'}}>Listing Not Found</h2>
-      </>
-    )
+      <h2 style={{ textAlign: 'center', margin: '5rem 0' }}>
+        Error loading listing
+      </h2>
+    );
   }
-  
 
-  const detailsRows = Object.entries(listings.details).map(
+  if(loading) {
+    return (
+      <h2 style={{ textAlign: 'center', margin: '5rem 0' }}>
+        Loading Listing
+      </h2>
+    );
+  }
+
+  if (!listing) {
+    return (
+      <h2 style={{ textAlign: 'center', margin: '5rem 0' }}>
+        Listing Not Found
+      </h2>
+    );
+  }
+
+  const detailsRows = Object.entries(listing?.details || {}).map(
     ([details, info]) => [
       details, 
       info.toString()
@@ -47,23 +69,24 @@ function ListingDetails() {
     "Saturday",
     "Sunday"
   ];
+
   const openingHoursRows = weekOrder.map((day) => {
-    const details = listings.businessHours[day];
+    const details = listing?.businessHours?.[day];
 
     if (!details || details.isClosed) {
       return [day, "Closed", "-"];
     }
 
-    const slot = details.slots[0];
+    const slot = details?.slots?.[0];
 
     return [
       day,
-      slot.open,
-      slot.close
+      slot?.open || "-",
+      slot?.close || "-"
     ];
   });
 
-  const imageList = listings.images.map(image => image.fullUrl);
+  const imageList = listing?.images?.map(image => image.fullUrl) || [];
 
 
   return (
@@ -77,11 +100,11 @@ function ListingDetails() {
             <div className="likes">
               <div className="likes-count">
                 <i className="fa-solid fa-thumbs-up"></i>
-                {listings.likes}
+                {listing.likes}
               </div>
 
               <div className="views-count">
-                ({listings.views} Views)
+                ({listing.views} Views)
               </div>
             </div>
 
@@ -99,17 +122,17 @@ function ListingDetails() {
           </div>
 
           <RatingSection
-            rating={listings.rating}
-            review_count={listings.reviews}
-            ratingCount={listings.ratingCount}
-            ratingStats={listings.ratingStats}
-            avgRatings={listings.factorAvgRatings}
+            rating={listing.rating}
+            review_count={listing.reviews}
+            ratingCount={listing.ratingCount}
+            ratingStats={listing.ratingStats}
+            avgRatings={listing.factorAvgRatings}
             listingId={listingId}
           />
         </div>
 
         <div className="listing-details-right">
-          <ListingBasicInfo listings={listings}/>
+          <ListingBasicInfo listing={listing}/>
 
           <InfoTable 
             title='Opening Hours'
@@ -127,8 +150,8 @@ function ListingDetails() {
         </div>
       </div>
 
-      <ListingSection title="Similar Listings" items={newListings} see_all_navigate='/similarListings'/>
-      <ListingSection title="Recommended" items={recommendedListings} see_all_navigate='/recommendedListings'/>
+      <ListingSection title="Similar Listings" listings={newListings} see_all_navigate='/similarListings'/>
+      <ListingSection title="Recommended" listings={recommendedListings} see_all_navigate='/recommendedListings'/>
     </>
   )
 }

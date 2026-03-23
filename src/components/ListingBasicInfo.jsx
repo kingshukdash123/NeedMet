@@ -6,7 +6,7 @@ import website from '../assets/website.svg'
 import whatsapp from '../assets/whatsapp.svg'
 import '../style/ListingBasicInfo.css'
 
-export default function ListingBasicInfo({ listings, className = '' }) {
+export default function ListingBasicInfo({ listing, className = '' }) {
 
     const socialIcons = {
         instagram: <img src={instagram} alt="instagram" className='social-icons-img' />,
@@ -32,32 +32,32 @@ export default function ListingBasicInfo({ listings, className = '' }) {
     return (
         <div className={`listing-basic-info ${className}`}>
 
-            <h1 className='listing-basic-info-category'>{listings.category}</h1>
+            <h1 className='listing-basic-info-category'>{listing.category}</h1>
 
             {/* Title */}
-            <h2 className="listing-info-title">{listings.name}</h2>
+            <h2 className="listing-info-title">{listing.name}</h2>
 
             {/* Rating */}
             <div className="listing-rating">
                 <div className="five-stars">
-                    {renderStars(Math.trunc(listings.rating))}
+                    {renderStars(Math.trunc(listing.rating))}
                 </div>
                 <span className="rating-value">
-                    <span>{listings.rating} </span>
-                    ({listings.reviews} reviews)
+                    <span>{listing.rating} </span>
+                    ({listing.reviews} reviews)
                 </span>
             </div>
 
             {/* Location + Social */}
             <div className="location">
                 <i className="fa-solid fa-location-dot"></i>
-                <span>{listings.address}</span>
+                <span>{listing.address}</span>
             </div>
 
             {/* social */}
             <div className="social-icons">
-                {listings.social &&
-                    Object.entries(listings.social).map(([key, value]) => {
+                {listing.social &&
+                    Object.entries(listing.social).map(([key, value]) => {
                         if (!socialIcons[key] || !value) return null;
                         return (
                             <a key={key} href={value} target="_blank" rel="noreferrer">
@@ -70,18 +70,18 @@ export default function ListingBasicInfo({ listings, className = '' }) {
             {/* Description */}
             <div className="listing-description">
                 <h4>Description</h4>
-                <p>{listings.description}</p>
+                <p>{listing.description}</p>
             </div>
 
             {/* Owner */}
             <div className="listing-owner">
                 <div className="owner-left">
                     <div className="owner-logo">
-                        {listings.ownerName[0]}
+                        {listing.ownerName[0]}
                     </div>
 
                     <div>
-                        <p className="owner-name">{listings.ownerName}</p>
+                        <p className="owner-name">{listing.ownerName}</p>
                         <p className="owner-role">
                             Contributor
                             <img src={blueTick} alt="verified" />

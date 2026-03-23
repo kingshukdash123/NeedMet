@@ -1,36 +1,29 @@
 import { useState, useEffect } from "react";
 
-const cache = {};
-
-export const useListings = (fetchFunction, ...params) => {
-
-  const key = fetchFunction.name + JSON.stringify(params);
-
-  const [listings, setListings] = useState(cache[key] ?? []);
-  const [loading, setLoading] = useState(!(key in cache));
+export const useListings = (fetchFunction, params = {}, enabled = true) => {
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
-      try {
-        setError(null);
-        setLoading(true);
-        
-        const data = await fetchFunction(...params);
+    try {
+      setLoading(true);
+      setError(null);
 
-        cache[key] = data;
-        setListings(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      const data = await fetchFunction(params);
+      setListings(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (key in cache) return;
+    if (!fetchFunction || !enabled) return;
 
     fetchData();
-  }, [key]);
+  }, [fetchFunction, enabled, JSON.stringify(params)]);
 
   return { listings, loading, error };
 };
