@@ -1,5 +1,6 @@
 import '../style/RatingSection.css'
 import { useReviews } from '../hooks/useReviews'
+// import { useEffect, useRef } from "react";
 
 function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRatings = {}, listingId }) {
 
@@ -28,7 +29,36 @@ function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRati
   const overall = Math.round(((avgRatings.behaviour) + (avgRatings.quality)+ (avgRatings.value)) / 3)
   const getPercent = (val) => Math.round(((val) / 5) * 100);
 
-  const { reviews, loading, hasMore, loadMore } = useReviews(listingId, 2);
+  const { reviews, loading, hasMore, loadMore } = useReviews(listingId, 4);
+  // console.log(reviews)
+
+  // const loadMoreRef = useRef(null);
+  // const containerRef = useRef(null);
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       const first = entries[0];
+
+  //       if (first.isIntersecting && hasMore && !loading) {
+  //         loadMore();
+  //       }
+  //     },
+  //     {
+  //       root: containerRef.current, // 🔥 THIS IS THE FIX
+  //       rootMargin: "100px",
+  //       threshold: 0
+  //     }
+  //   );
+
+  //   const current = loadMoreRef.current;
+
+  //   if (current) observer.observe(current);
+
+  //   return () => {
+  //     if (current) observer.unobserve(current);
+  //   };
+  // }, [hasMore, loading, loadMore]);
 
   return (
     <div className="rating-review-section">
@@ -141,7 +171,7 @@ function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRati
             {
               <>
                 {
-                  !reviews.length ? (
+                  !loading && !reviews.length ? (
                     <div className="empty-review-text">No Reviews Yet</div>
                   ) : (
                     <div className="reviews-list">
@@ -175,20 +205,21 @@ function RatingSection({ rating, review_count, ratingCount, ratingStats, avgRati
                           </div>
                         ))
                       }
+
+                      
+                      {
+                        loading ? 
+                        <p>Loading more reviews...</p> : 
+                        hasMore && ( <button onClick={loadMore} className="review-see-all-btn"> Load More Reviews </button> )
+                      }
                     </div>
                   )
                 }
 
-                {hasMore && (
-                  <button onClick={loadMore} className="review-see-all-btn">
-                    Load More Reviews
-                  </button>
-                )}
+                {/* <div ref={loadMoreRef} style={{ height: "20px" }}></div> */}
               </>
             }
-
             
-
         </div>
     </div>
     

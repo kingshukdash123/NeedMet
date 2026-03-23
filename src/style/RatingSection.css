@@ -240,6 +240,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 /* Card */
@@ -309,7 +311,6 @@
 }
 
 .review-see-all-btn {
-  margin: 1rem 0;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.132);
     background: transparent;
@@ -318,6 +319,7 @@
     border-radius: 6px;
     cursor: pointer;
     transition: 0.2s ease;
+    width: 100%;
 }
 
 .review-see-all-btn:hover {
