@@ -251,7 +251,13 @@ class Listing {
       likes: json.likes || 0,
       views: json.views || 0,
 
-      social: json.social || {},
+      social: {
+        instagram: json.social?.Instagram || "",
+        facebook: json.social?.Facebook || "",
+        website: json.social?.Website || "",
+        linkedin: json.social?.Linkedin || "",
+        whatsapp: json.social?.WhatsApp || "",
+      },
 
       ratingStats: {
         '5': Number(json.ratingStats?.['5'] ?? 0),

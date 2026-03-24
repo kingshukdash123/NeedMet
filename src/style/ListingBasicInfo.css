@@ -67,16 +67,21 @@
 }
 
 .social-icons {
-    padding: 0.2rem 0;
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
 .social-icons-img {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     transition: 0.2s;
+}
+
+.social-icons a.disabled {
+  opacity: 0.15;
+  pointer-events: none;
+  filter: grayscale(100%);
 }
 
 .social-icons a:hover {

@@ -11,9 +11,31 @@ export default function ListingBasicInfo({ listing, className = '' }) {
     const socialIcons = {
         instagram: <img src={instagram} alt="instagram" className='social-icons-img' />,
         facebook: <img src={facebook} alt="facebook" className='social-icons-img'/>,
-        website: <img src={linkedin} alt="linkedin" className='social-icons-img' />,
-        whatsapp: <img src={website} alt="website" className='social-icons-img' />,
-        linkedin: <img src={whatsapp} alt="whatsapp" className='social-icons-img' />
+        website: <img src={website} alt="linkedin" className='social-icons-img' />,
+        whatsapp: <img src={whatsapp} alt="website" className='social-icons-img' />,
+        linkedin: <img src={linkedin} alt="whatsapp" className='social-icons-img' />
+    }
+
+    function formatSocialLink(key, value) {
+        if (!value) return "#";
+
+        const clean = value.trim();
+
+        if (key === "whatsapp") {
+            let number = clean.replace(/[^\d]/g, "");
+
+            if (number.length === 10) {
+            number = "91" + number;
+            }
+
+            return `https://wa.me/${number}`;
+        }
+
+        if (clean.startsWith("http://") || clean.startsWith("https://")) {
+            return clean;
+        }
+
+        return `https://${clean}`;
     }
 
     const renderStars = (count) => {
@@ -56,15 +78,23 @@ export default function ListingBasicInfo({ listing, className = '' }) {
 
             {/* social */}
             <div className="social-icons">
-                {listing.social &&
-                    Object.entries(listing.social).map(([key, value]) => {
-                        if (!socialIcons[key] || !value) return null;
-                        return (
-                            <a key={key} href={value} target="_blank" rel="noreferrer">
-                                {socialIcons[key]}
-                            </a>
-                        )
-                    })}
+                {Object.keys(socialIcons).map((key) => {
+                    const value = listing.social[key];
+
+                    return (
+                    <a
+                        key={key}
+                        className={!value ? "disabled" : ""}
+                        href={formatSocialLink(key, value)}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => !value && e.preventDefault()}
+                    >
+                        {console.log(key, value)}
+                        {socialIcons[key]}
+                    </a>
+                    );
+                })}
             </div>
 
             {/* Description */}
