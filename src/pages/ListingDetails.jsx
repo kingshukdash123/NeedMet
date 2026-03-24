@@ -1,4 +1,4 @@
-import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection, ImageSlider, PreviewImage } from '../components'
+import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection, PreviewImage } from '../components'
 // import { listing } from '../data/listing_dummy_data.js'
 import { useParams, useLocation } from 'react-router-dom';
 import { useListings } from '../hooks/useListings.js';
@@ -16,6 +16,7 @@ function ListingDetails() {
   const { listing: fetchedListing, loading, error } = useListingById(listingId, !stateListing);
 
   const listing = stateListing || fetchedListing;
+  console.log(listing)
   const shouldFetch = !!listing;
 
   const { listings: newListings, loading: newLoading, error: newError} = useListings(
@@ -147,7 +148,7 @@ function ListingDetails() {
             rows={detailsRows}
             style={{width: '100%'}}
             fixHeight={'280px'}
-          />
+          /> 
         </div>
       </div>
 

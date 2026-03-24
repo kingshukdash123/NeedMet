@@ -90,7 +90,6 @@ export default function ListingBasicInfo({ listing, className = '' }) {
                         rel="noreferrer"
                         onClick={(e) => !value && e.preventDefault()}
                     >
-                        {console.log(key, value)}
                         {socialIcons[key]}
                     </a>
                     );
