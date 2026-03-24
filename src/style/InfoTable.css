@@ -13,6 +13,10 @@
   padding: 20px;
 }
 
+.table-container {
+  width: 100%;
+}
+
 .info-table {
   width: 100%;
   border-collapse: collapse;
