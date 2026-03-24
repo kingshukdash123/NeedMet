@@ -32,3 +32,9 @@
 .info-table th {
   background-color: rgba(0, 0, 0, 0.146);
 }
+
+.hours-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

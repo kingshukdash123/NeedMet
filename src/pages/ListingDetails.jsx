@@ -75,15 +75,20 @@ function ListingDetails() {
     const details = listing?.businessHours?.[day];
 
     if (!details || details.isClosed) {
-      return [day, "Closed", "-"];
+      return [day, "Closed"];
     }
 
-    const slot = details?.slots?.[0];
+    const slots = details?.slots;
 
     return [
       day,
-      slot?.open || "-",
-      slot?.close || "-"
+      <div className="hours-cell">
+        {slots.map((slot, index) => (
+          <div key={index}>
+            {slot.open} - {slot.close}
+          </div>
+        ))}
+      </div>
     ];
   });
 
@@ -137,7 +142,7 @@ function ListingDetails() {
 
           <InfoTable 
             title='Opening Hours'
-            columns={['Day', 'Open', 'Close']}
+            columns={['Day', 'Hours']}
             rows={openingHoursRows}
             style={{width: '100%'}}
           />
