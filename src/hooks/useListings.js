@@ -1,17 +1,32 @@
 import { useState, useEffect } from "react";
+import { getCache, setCache } from "../utils/cache";
 
 export const useListings = (fetchFunction, params = {}, enabled = true) => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
+  const cacheKey = fetchFunction.name + "_" + JSON.stringify(params);
+
   const fetchData = async () => {
     try {
       setLoading(true);
       setError(null);
 
+      const cached = getCache(cacheKey);
+      if (cached) {
+        console.log("[Cache Hit]", cacheKey);
+        setListings(cached);
+        setLoading(false);
+        return;
+      }
+
       const data = await fetchFunction(params);
+
+      setCache(cacheKey, data, 5 * 60 * 1000);
+
       setListings(data);
+
     } catch (err) {
       setError(err);
     } finally {
