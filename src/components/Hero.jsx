@@ -1,7 +1,7 @@
 import "../style/Hero.css";
 import ImageSlider from "./ImageSlider";
 
-export default function Hero() {
+export default function Hero({ data }) {
   const tags = [
     "Saloon",
     "Spa",
@@ -11,6 +11,12 @@ export default function Hero() {
     "Garage",
     "Fitness / Yoga Instructors"
   ];
+
+  const images = data?.banners?.map(banner => {
+    return {
+      'banner': banner.imageUrl, 
+      'route': banner.route}
+  }) || [];
 
   return (
     <section className="hero">
@@ -42,7 +48,7 @@ export default function Hero() {
 
         {/* RIGHT SIDE */}
         <div className="hero-right">
-          <ImageSlider width="90%" slide={true}/>
+          <ImageSlider width="90%" slide={true} images={images}/>
         </div>
 
       </div>

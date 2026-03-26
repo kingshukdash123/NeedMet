@@ -1,10 +1,10 @@
 import { ListingSection } from "../components"
 // import { listing } from '../data/listing_dummy_data.js'
 import { useListings } from "../hooks/useListings";
-import { getAllListings } from "../services/firebase/firestore/listingService";
+import { getNewListings } from "../services/firebase/firestore/listingService";
 
 export default function RecommendedListings() {
-    const { listings, loading, error} = useListings(getAllListings, 20)
+    const { listings, loading, error} = useListings(getNewListings, {'quantity': 20})
     
     
     if (loading) {

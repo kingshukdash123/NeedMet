@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useListings } from '../hooks/useListings.js';
 import { useListingById } from '../hooks/useListingById.js';
 import '../style/ListingDetails.css'
-import { getListingById, getAllListings, getNewListings } from '../services/firebase/firestore/listingService.js';
+import { getNewListings } from '../services/firebase/firestore/listingService.js';
 
 
 function ListingDetails() {
@@ -16,7 +16,7 @@ function ListingDetails() {
   const { listing: fetchedListing, loading, error } = useListingById(listingId, !stateListing);
 
   const listing = stateListing || fetchedListing;
-  console.log(listing)
+  // console.log(listing)
   const shouldFetch = !!listing;
 
   const { listings: newListings, loading: newLoading, error: newError} = useListings(
@@ -25,7 +25,7 @@ function ListingDetails() {
     shouldFetch
   )
   const { listings: recommendedListings, loading: recommendedLoading, error: recommendedError} = useListings(
-    getAllListings, 
+    getNewListings, 
     {'quantity':10}, 
     shouldFetch
   )

@@ -23,10 +23,12 @@ export const useListings = (fetchFunction, params = {}, enabled = true) => {
 
       const data = await fetchFunction(params);
 
-      setCache(cacheKey, data, 5 * 60 * 1000);
-
-      setListings(data);
-
+      if(data.length > 0) {
+        console.log('[Cache Set]', cacheKey)
+        setCache(cacheKey, data, 5 * 60 * 1000);
+  
+        setListings(data || []);
+      }
     } catch (err) {
       setError(err);
     } finally {

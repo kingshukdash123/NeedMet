@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "../style/ImageSlider.css";
+import { useNavigate } from "react-router-dom";
 
 function ImageSlider({
   slide=false, 
@@ -15,6 +16,8 @@ function ImageSlider({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef(null);
+
+  const navigate = useNavigate()
 
   const startAutoSlide = () => {
     if(!slide) return;
@@ -69,10 +72,11 @@ function ImageSlider({
       >
         {images.map((img, index) => (
           <img
-            src={img}
+            src={img?.banner}
             alt={`slide-${index}`}
             key={index}
             className="carousel-image"
+            onClick={() => {navigate(img?.route)}}
           />
         ))}
       </div>
