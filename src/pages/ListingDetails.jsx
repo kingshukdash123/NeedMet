@@ -157,8 +157,8 @@ function ListingDetails() {
         </div>
       </div>
 
-      <ListingSection title="Similar Listings" listings={newListings} see_all_navigate='/similarListings'/>
-      <ListingSection title="Recommended" listings={recommendedListings} see_all_navigate='/recommendedListings'/>
+      <ListingSection title="Similar Listings" listings={newListings} see_all_navigate='/listings/similar'/>
+      <ListingSection title="Recommended Listings" listings={recommendedListings} see_all_navigate='/listings/recommended'/>
     </>
   )
 }

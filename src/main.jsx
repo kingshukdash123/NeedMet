@@ -7,9 +7,7 @@ import { RouterProvider } from 'react-router-dom'
 import { 
   Home, 
   ListingDetails, 
-  NewlyAddedListings, 
-  RecommendedListings, 
-  SimilarListings, 
+  ListingsPage
 } from './pages'
 
 const router = createBrowserRouter(
@@ -17,9 +15,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route path='' element={<Home />} /> 
       <Route path='listing/:listingId' element={<ListingDetails />} />
-      <Route path='newlyAddedListings' element={<NewlyAddedListings/>}/>
-      <Route path='recommendedListings' element={<RecommendedListings/>}/>
-      <Route path='similarListings' element={<SimilarListings/>}/>
+      <Route path="/listings/:type" element={<ListingsPage />} />
     </Route>
   )
 

@@ -4,10 +4,6 @@ import { useListings } from '../hooks/useListings.js';
 import { useHomeDetails } from '../hooks/useHomeDetails.jsx';
 import { getListingByCategory, getNewListings } from '../services/firebase/firestore/listingService.js';
 
-// import { firestore } from '../firebase/firebaseConfig.js';
-// import { collection, getDocs } from 'firebase/firestore';
-
-
 function Home() {
 
   const { homeData, loading: homeLoading, error: homeError } = useHomeDetails();
@@ -39,8 +35,8 @@ function Home() {
     <>
       <Hero data={homeData}/>
       <CategorySection data={homeData}/>
-      <ListingSection title="Recommended Listings" listings={homeListings} see_all_navigate='/recommendedListings'/>
-      <ListingSection title="Newly Added Listings" listings={newListings} see_all_navigate='/newlyAddedListings'/>
+      <ListingSection title="Recommended Listings" listings={homeListings} see_all_navigate='/listings/recommended'/>
+      <ListingSection title="Newly Added Listings" listings={newListings} see_all_navigate='/listings/newly_added'/>
     </>
   )
 }

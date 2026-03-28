@@ -1,13 +1,9 @@
 import Home from "./Home";
 import ListingDetails from "./ListingDetails";
-import NewlyAddedListings from "./NewlyAddedListings";
-import RecommendedListings from "./RecommendedListings";
-import SimilarListings from "./SimilarListings";
+import ListingsPage from "./ListingsPage";
 
 export {
     Home, 
     ListingDetails, 
-    NewlyAddedListings, 
-    RecommendedListings, 
-    SimilarListings
+    ListingsPage
 }

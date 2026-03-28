@@ -6,7 +6,7 @@ export const useListings = (fetchFunction, params = {}, enabled = true) => {
   const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
-  const cacheKey = fetchFunction.name + "_" + JSON.stringify(params);
+  const cacheKey = fetchFunction?.name + "_" + JSON.stringify(params);
 
   const fetchData = async () => {
     try {
