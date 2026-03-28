@@ -37,7 +37,10 @@ export const useListings = (fetchFunction, params = {}, enabled = true) => {
   };
 
   useEffect(() => {
-    if (!fetchFunction || !enabled) return;
+    if (!fetchFunction || !enabled) {
+      setLoading(false);
+      return;
+    }
 
     fetchData();
   }, [fetchFunction, enabled, JSON.stringify(params)]);

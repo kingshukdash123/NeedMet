@@ -15,13 +15,13 @@ function Home() {
     listings: homeListings, 
     loading: homeListingsLoading, 
     error: homeListingsError
-  } = useListings(getListingByCategory,{ category: categoryList, quantity: 15 },categoryList.length > 0)
+  } = useListings(getListingByCategory,{ category: categoryList, quantity: 20 },categoryList.length > 0)
 
   const { 
     listings: newListings, 
     loading: newLoading, 
     error: newError
-  } = useListings(getNewListings, {'quantity': 10})
+  } = useListings(getNewListings, {'quantity': 20})
 
   if (homeLoading) {
     return <HomeLoader />;

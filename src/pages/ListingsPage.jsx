@@ -1,37 +1,44 @@
 import { useParams } from "react-router-dom";
 import { useListings } from "../hooks/useListings";
-import { getNewListings } from "../services/firebase/firestore/listingService";
+import { getNewListings, getListingByCategory } from "../services/firebase/firestore/listingService";
 import { useLocation } from "react-router-dom";
 import { ListingSection } from "../components";
 
 const ListingsPage = () => {
   const { state } = useLocation();
+  const { type } = useParams();
 
-  let type, fetchFn;
+  let fetchFn;
 
   const title = state?.title;
   const data = state?.listings;
-  const params = state?.params || {};
+  let params = state?.params || {'quantity': 20};
 
-  if(type === '/listings/newly_added') {
-    fetchFn = getNewListings
+  // console.log('params:', params)
+
+  
+  if (type === "recommended") {
+    fetchFn = getListingByCategory;
+    params = {
+      category: ["Printing & Xerox Shops", "Gas/LPG Cylinder", "Room Rent"],
+      ...params,
+    };
+  } 
+  else if (type === "newly_added") {
+    fetchFn = getNewListings;
+    params = {
+      ...params,
+    };
+  } 
+  else if (type === "similar") {
+    fetchFn = getListingByCategory;
+    params = {
+      category: ["some dynamic category"],
+      ...params,
+    };
   }
-
-  // { type } = useParams();
-
-//   if (type === "recommended") {
-//     fetchFn = getListingByCategory;
-//     params = { category: ["Printing & Xerox Shops", "Gas/LPG Cylinder", "Room Rent"] };
-//   } 
-//   else if (type === "new") {
-//     fetchFn = getNewListings;
-//     params = { quantity: 20 };
-//   } 
-//   else if (type === "similar") {
-//     fetchFn = getListingByCategory;
-//     params = { category: ["some dynamic category"] };
-//   }
-
+  
+  // console.log(params)
   const { listings: fetchedListings, loading, error } = useListings(fetchFn, params, !data);
 
   const listings = data || fetchedListings;
@@ -42,6 +49,10 @@ const ListingsPage = () => {
 
   if(error) {
     return <p>Something went wrong, Come back later...</p>
+  }
+
+  if(listings.length == 0) {
+    return <p>No listings found</p>
   }
 
   return (
