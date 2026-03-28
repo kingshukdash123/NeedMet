@@ -7,7 +7,8 @@ import { RouterProvider } from 'react-router-dom'
 import { 
   Home, 
   ListingDetails, 
-  ListingsPage
+  ListingsPage, 
+  AllCategory
 } from './pages'
 
 const router = createBrowserRouter(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='' element={<Home />} /> 
       <Route path='listing/:listingId' element={<ListingDetails />} />
       <Route path="/listings/:type" element={<ListingsPage />} />
+      <Route path="/all_category" element={<AllCategory />} />
     </Route>
   )
 
