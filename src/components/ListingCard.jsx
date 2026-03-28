@@ -25,11 +25,11 @@ export default function ListingCard({listing}) {
       <div className="listing-content">
         <p className="listing-category">{listing.category}</p>
 
-        <h3 className="listing-title">{listing.name.length > 20? listing.name.slice(0, 20) + "...": listing.name}</h3>
+        <h3 className="listing-title">{listing.name}</h3>
 
         <div className="listing-location">
           <i className="fa-solid fa-location-dot loc-icon"></i>
-          <span>{listing.address.length > 23 ? listing.address.slice(0, 23) + "..." : listing.address}</span>
+          <span>{listing.address}</span>
         </div>
 
         <div className="listing-card-rating">

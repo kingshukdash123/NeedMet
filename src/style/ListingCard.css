@@ -50,6 +50,9 @@
   color: #1a1a1a;
   margin: 0 0 6px 0;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Location */
@@ -65,6 +68,12 @@
 .listing-location i {
   font-size: 12px;
   color: #1c8c8c;
+}
+
+.listing-location span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Rating */
