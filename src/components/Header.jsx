@@ -16,7 +16,7 @@ export default function Header() {
         {/* Logo */}
         <div className="logo" onClick={logoClick}>
           <img src={companyLogo} alt="logo" />
-          <h2>NeedMate</h2>
+          <h2>NeedMet</h2>
         </div>
 
         {/* Hamburger */}
