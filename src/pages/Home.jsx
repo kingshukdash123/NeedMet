@@ -34,7 +34,7 @@ function Home() {
   return (
     <>
       <Hero data={homeData}/>
-      <CategorySection data={homeData}/>
+      <CategorySection title='Categories' data={homeData} see_all_navigate='/all_categories'/>
       <ListingSection title="Recommended Listings" listings={homeListings} see_all_navigate='/listings/recommended'/>
       <ListingSection title="Newly Added Listings" listings={newListings} see_all_navigate='/listings/newly_added'/>
     </>

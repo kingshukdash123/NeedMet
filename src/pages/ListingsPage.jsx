@@ -6,17 +6,25 @@ import { ListingSection } from "../components";
 
 const ListingsPage = () => {
   const { state } = useLocation();
-  const { type } = useParams();
+  const { type, category_name } = useParams();
 
   let fetchFn;
-
-  const title = state?.title;
+  
+  const title = state?.title || category_name;
   const data = state?.listings;
   let params = state?.params || {'quantity': 20};
 
+  // CATEGORY PAGE (NEW FIX)
+  if (category_name) {
+    fetchFn = getListingByCategory;
+    params = {
+      category: [decodeURIComponent(category_name)], // 🔥 important
+      ...params,
+    };
+  }
+
   // console.log('params:', params)
 
-  
   if (type === "recommended") {
     fetchFn = getListingByCategory;
     params = {

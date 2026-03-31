@@ -1,6 +1,7 @@
 .listing-card {
   padding: 0.5rem 0.5rem;
-  min-width: 190px;               /* compact width like screenshot */
+  min-width: 70px;
+  max-width: 260px;
   background: #ffffff;
   border-radius: 14px;
   overflow: hidden;
