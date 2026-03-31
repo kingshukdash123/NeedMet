@@ -1,7 +1,7 @@
 import { Header, Footer, Hero, CategorySection, ListingSection, HomeLoader } from '../components'
 // import { listing } from '../data/listing_dummy_data.js'
 import { useListings } from '../hooks/useListings.js';
-import { useHomeDetails } from '../hooks/useHomeDetails.jsx';
+import { useHomeDetails } from '../hooks/useHomeDetails.js';
 import { getListingByCategory, getNewListings } from '../services/firebase/firestore/listingService.js';
 
 function Home() {
