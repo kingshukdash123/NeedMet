@@ -1,5 +1,5 @@
 import { useCategories } from "../hooks/useCategories";
-import { CategorySection } from "../components";
+import { CategorySection, AllCategoryLoader } from "../components";
 import { useMemo } from "react";
 
 export default function AllCategory() {
@@ -16,7 +16,7 @@ export default function AllCategory() {
     }, {});
   }, [categories]);
 
-  if (loading) return <p>Loading categories...</p>;
+  if (loading) return <AllCategoryLoader />
   if (error) return <p>Something went wrong!</p>;
 
   return (

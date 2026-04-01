@@ -1,4 +1,4 @@
-import { Header, Footer, Hero, CategorySection, ListingSection, HomeLoader } from '../components'
+import { Hero, CategorySection, ListingSection, HomeLoader } from '../components'
 // import { listing } from '../data/listing_dummy_data.js'
 import { useListings } from '../hooks/useListings.js';
 import { useHomeDetails } from '../hooks/useHomeDetails.js';

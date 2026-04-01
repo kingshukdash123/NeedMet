@@ -1,4 +1,4 @@
-import { Header, Footer, ListingBasicInfo, InfoTable, ListingSection, RatingSection, PreviewImage } from '../components'
+import { ListingBasicInfo, InfoTable, ListingSection, RatingSection, PreviewImage, ListingDetailsLoader } from '../components'
 // import { listing } from '../data/listing_dummy_data.js'
 import { useParams, useLocation } from 'react-router-dom';
 import { useListings } from '../hooks/useListings.js';
@@ -39,11 +39,7 @@ function ListingDetails() {
   }
 
   if(loading) {
-    return (
-      <h2 style={{ textAlign: 'center', margin: '5rem 0' }}>
-        Loading Listing
-      </h2>
-    );
+    return <ListingDetailsLoader />
   }
 
   if (!listing) {

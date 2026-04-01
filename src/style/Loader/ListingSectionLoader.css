@@ -1,0 +1,94 @@
+/* Section */
+.listing-section {
+  padding: 20px 80px;
+}
+
+/* Header */
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.listing-header.no-see-all {
+  justify-content: flex-start;
+}
+
+/* Grid (FIXED) */
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Skeleton Base */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 25%,
+    #f3f4f6 50%,
+    #e5e7eb 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Card */
+.skeleton-card {
+  width: 100%;   /* ✅ FIXED (remove fixed 200px) */
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Image */
+.skeleton-img {
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* Content */
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-title {
+  width: 220px;
+  height: 30px;
+}
+
+.skeleton-see-all {
+  width: 70px;
+  height: 18px;
+}
+
+.skeleton-tag {
+  width: 80px;
+  height: 12px;
+}
+
+.skeleton-name {
+  width: 120px;
+  height: 16px;
+}
+
+.skeleton-location {
+  width: 90%;
+  height: 12px;
+}
+
+.skeleton-rating {
+  width: 60px;
+  height: 12px;
+}

@@ -1,5 +1,5 @@
 .hl-container {
-  padding: 24px;
+  padding: 40px 80px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -53,7 +53,7 @@
 
 .hl-tag {
   height: 24px;
-  width: 80px;
+  width: 100px;
   border-radius: 999px;
 }
 
@@ -87,9 +87,10 @@
 
 /* Categories */
 .hl-categories {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: repeat(8, 0.5fr); */
+  gap: 3rem;
 }
 
 .hl-category-item {
@@ -108,7 +109,7 @@
 /* Cards */
 .hl-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
 }
 

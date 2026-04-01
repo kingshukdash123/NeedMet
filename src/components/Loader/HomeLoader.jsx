@@ -18,7 +18,7 @@ const HomeLoader = () => {
           <SkeletonBox className="hl-search" />
 
           <div className="hl-tags">
-            {Array(6).fill(0).map((_, i) => (
+            {Array(8).fill(0).map((_, i) => (
               <SkeletonBox key={i} className="hl-tag" />
             ))}
           </div>
@@ -47,7 +47,7 @@ const HomeLoader = () => {
         <SkeletonBox className="hl-title" />
 
         <div className="hl-cards">
-          {Array(6).fill(0).map((_, i) => (
+          {Array(8).fill(0).map((_, i) => (
             <div key={i} className="hl-card">
               <SkeletonBox className="hl-card-img" />
               <SkeletonBox className="hl-text hl-medium" />
@@ -62,7 +62,7 @@ const HomeLoader = () => {
         <SkeletonBox className="hl-title" />
 
         <div className="hl-cards">
-          {Array(6).fill(0).map((_, i) => (
+          {Array(8).fill(0).map((_, i) => (
             <div key={i} className="hl-card">
               <SkeletonBox className="hl-card-img" />
               <SkeletonBox className="hl-text hl-medium" />

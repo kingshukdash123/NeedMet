@@ -1,0 +1,192 @@
+/* Container */
+.detail-page {
+  padding: 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* TOP */
+.detail-top {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+/* LEFT */
+.detail-main-img {
+  width: 100%;
+  height: 260px;
+  border-radius: 16px;
+}
+
+.detail-thumbnails {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.detail-thumb {
+  width: 170px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.detail-btn {
+  width: 100px;
+  height: 35px;
+  border-radius: 8px;
+}
+
+/* RIGHT */
+.detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-category {
+  width: 120px;
+  height: 12px;
+}
+
+.detail-title {
+  width: 200px;
+  height: 20px;
+}
+
+.detail-rating {
+  width: 150px;
+  height: 14px;
+}
+
+.detail-location {
+  width: 80%;
+  height: 12px;
+}
+
+.detail-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.detail-desc {
+  width: 100%;
+  height: 50px;
+}
+
+.detail-user {
+  width: 180px;
+  height: 30px;
+}
+
+/* MIDDLE */
+.detail-middle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.detail-box {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.detail-box-title {
+  width: 150px;
+  height: 16px;
+  margin-bottom: 10px;
+}
+
+.detail-rating-bars {
+  width: 100%;
+  height: 100px;
+}
+
+.detail-table {
+  width: 100%;
+  height: 120px;
+}
+
+.detail-review {
+  width: 100%;
+  height: 60px;
+}
+
+/* SECTION */
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-section-title {
+  width: 200px;
+  height: 18px;
+}
+
+/* GRID (reuse listing style) */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Skeleton Card reuse */
+.skeleton-card {
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.skeleton-name {
+    margin-bottom: 3px;
+}
+
+/* ================= Skeleton Base ================= */
+.skeleton {
+  background: #e5e7eb;
+  border-radius: 12px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  .detail-top {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-middle {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-page {
+    padding: 20px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-page {
+    padding: 16px;
+  }
+}
