@@ -12,7 +12,7 @@ function AllCategoryLoader({ sections = 4, itemsPerSection = 8 }) {
           <div className="skeleton skeleton-category-title"></div>
 
           {/* Items */}
-          <div className="category-grid">
+          <div className="all-category-grid">
             {Array.from({ length: itemsPerSection }).map((_, i) => (
               <div key={i} className="category-item">
 
