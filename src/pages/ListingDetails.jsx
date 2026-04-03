@@ -113,7 +113,6 @@ function ListingDetails() {
 
   return (
     <>
-      <ListingDetailsLoader />
       <div className="listing-details">
 
         <div className="listing-details-left">
