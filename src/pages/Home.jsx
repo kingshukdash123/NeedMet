@@ -33,6 +33,7 @@ function Home() {
 
   return (
     <>
+      <HomeLoader />
       <Hero data={homeData}/>
       <CategorySection title='Categories' data={homeData} see_all_navigate='/all_categories'/>
       <ListingSection title="Recommended Listings" listings={homeListings} see_all_navigate='/listings/recommended'/>
