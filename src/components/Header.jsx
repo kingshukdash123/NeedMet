@@ -1,72 +1,117 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import "../style/Header.css";
+import '../style/Header.css'
 import companyLogo from '../assets/companyLogo.png';
+import play_store from '../assets/play_store.png';
 
 export default function Header() {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [sticked, setSticked] = useState(false);
-  const bottomRef = useRef(null);
-  const logoClick = () => navigate('/');
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setSticked(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "0px" }
-    );
-    // Observe the top section
-    const topSection = document.querySelector(".header-top");
-    if (topSection) observer.observe(topSection);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <>
-      {/* ── TOP SECTION: scrolls away ── */}
-      <div className="header-top">
-        <div className="logo" onClick={logoClick}>
-          <img src={companyLogo} alt="logo" />
-          <h2>NeedMet</h2>
-        </div>
-        <div className="header-top-actions">
-          <button className="btn-outline"><i className="fa-brands fa-google-play"></i>Play Store</button>
-        </div>
-      </div>
+      <header className="header">
+        <div className="header-inner">
 
-      {/* ── BOTTOM SECTION: sticks to top ── */}
-      <div className="header-bottom" ref={bottomRef}>
-        <div className="header-bottom-inner">
+          <div className="header-inner-left">
+            <div className="logo" onClick={() => navigate('/')}>
+              <img src={companyLogo} alt="NeedMet logo" />
+              <span className="logo-name">NeedMet</span>
+            </div>
 
-          {/* Logo — only visible when sticked */}
-          <div className={`logo logo-sticky ${sticked ? "visible" : ""}`} onClick={logoClick}>
-            <img src={companyLogo} alt="logo" />
-            <span>NeedMet</span>
+            {/* SEARCH */}
           </div>
 
-          <nav className={`nav ${menuOpen ? "active" : ""}`}>
-            <NavLink to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Home</NavLink>
-            <NavLink to="/all_categories" className="nav-link" onClick={() => setMenuOpen(false)}>Categories</NavLink>
-            <NavLink to="/about" className="nav-link" onClick={() => setMenuOpen(false)}>About Us</NavLink>
-            <NavLink to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-          </nav>
+          <div className="header-inner-right">
+            <NavLink to="/search" className="search-pill">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </NavLink>
+            {/* NAV */}
+            <nav className="nav">
+              <NavLink to="/" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Home</NavLink>
+              <NavLink to="/all_categories" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Categories</NavLink>
+              <NavLink to="/about" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>About Us</NavLink>
+              <NavLink to="/contact" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Contact</NavLink>
+            </nav>
 
-          <div className="search-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            {/* PLAY STORE */}
+            <a
+              className="play-store-btn"
+              href="https://play.google.com/store/apps/details?id=com.findon.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={play_store} alt="Get it on Play Store" />
+            </a>
+          </div>
+
+        </div>
+      </header>
+
+      {/* ── MOBILE TOP HEADER ── */}
+      <header className="mobile-header">
+        <div className="mobile-logo" onClick={() => navigate('/')}>
+          <img src={companyLogo} alt="logo" />
+          <span>NeedMet</span>
+        </div>
+
+        {/* PLAY STORE */}
+        <a
+          className="play-store-btn"
+          href="https://play.google.com/store/apps/details?id=com.findon.app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={play_store} alt="Get it on Play Store" />
+        </a>
+        
+      </header>
+
+      {/* ── MOBILE BOTTOM NAV ── */}
+      <nav className="bottom-nav">
+
+        <NavLink to="/" className={({ isActive }) => `bnav-item${isActive ? ' active' : ''}`}>
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z" />
+            <path d="M9 21V12h6v9" />
+          </svg>
+          <span>Home</span>
+        </NavLink>
+
+        <NavLink to="/all_categories" className={({ isActive }) => `bnav-item${isActive ? ' active' : ''}`}>
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Categories</span>
+        </NavLink>
+
+        {/* CENTER FAB */}
+        <NavLink to="/search" className="bnav-fab">
+          <div className="bnav-fab-inner">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
           </div>
+        </NavLink>
 
-          <div
-            className={`hamburger ${menuOpen ? "open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span></span><span></span><span></span>
-          </div>
+        <NavLink to="/about" className={({ isActive }) => `bnav-item${isActive ? ' active' : ''}`}>
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>About</span>
+        </NavLink>
 
-        </div>
-      </div>
+        <NavLink to="/contact" className={({ isActive }) => `bnav-item${isActive ? ' active' : ''}`}>
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <span>Contact</span>
+        </NavLink>
+
+      </nav>
     </>
   );
 }
