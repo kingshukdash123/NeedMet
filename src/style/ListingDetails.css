@@ -122,6 +122,20 @@
     gap: 1.25rem;
   }
 
+  .listing-details-left {
+    flex: 1.2 1 0% !important;  /* grow / shrink / basis */
+    min-width: 0;
+  }
+
+  .listing-details-right {
+    flex: 1 1 0% !important;
+    min-width: 0;
+  }
+
+  .main-image {
+    aspect-ratio: 4/3;
+  }
+
   .likes-contact {
     flex-direction: column;
     align-items: center;
