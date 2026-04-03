@@ -30,8 +30,7 @@ export default function Header() {
           <h2>NeedMet</h2>
         </div>
         <div className="header-top-actions">
-          <button className="btn-outline">Newsletter sign up</button>
-          <button className="btn-filled">Donate</button>
+          <button className="btn-outline"><i className="fa-brands fa-google-play"></i>Play Store</button>
         </div>
       </div>
 
