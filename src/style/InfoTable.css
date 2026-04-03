@@ -16,20 +16,21 @@
 .table-container {
   width: 100%;
   text-align: center;
-  overflow-x: auto; /* horizontal scroll if table overflows */
-  -webkit-overflow-scrolling: touch;
 }
 
 .info-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 300px; /* prevents table from collapsing too small */
+  table-layout: fixed; /* forces columns to share width equally — enables wrapping */
 }
 
 .info-table th,
 .info-table td {
   border: 1px solid #00000025;
   padding: 10px;
+  word-break: break-word;   /* break long words if needed */
+  white-space: normal;      /* allow text to wrap */
+  overflow-wrap: break-word;
 }
 
 .info-table th {
@@ -68,7 +69,6 @@
   .info-section {
     padding: 14px;
     border-radius: 6px;
-    align-items: center; /* left-align title on small screens */
   }
 
   .info-section h2 {
@@ -78,13 +78,13 @@
 
   .info-table th,
   .info-table td {
-    padding: 7px 8px;
-    font-size: 0.82rem;
-    white-space: nowrap; /* keep cells from wrapping awkwardly */
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
   .hours-cell {
     gap: 3px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 }
