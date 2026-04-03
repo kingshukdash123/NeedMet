@@ -3,24 +3,24 @@ import "../../style/Loader/AllCategoryLoader.css";
 
 function AllCategoryLoader({ sections = 4, itemsPerSection = 8 }) {
   return (
-    <div className="category-page-loader">
+    <div className="loader-category-page">
 
       {Array.from({ length: sections }).map((_, sectionIndex) => (
-        <div key={sectionIndex} className="category-section">
+        <div key={sectionIndex} className="loader-category-section">
 
           {/* Section Title */}
-          <div className="skeleton skeleton-category-title"></div>
+          <div className="loader-base loader-category-title"></div>
 
           {/* Items */}
-          <div className="all-category-grid">
+          <div className="loader-category-grid">
             {Array.from({ length: itemsPerSection }).map((_, i) => (
-              <div key={i} className="category-item">
+              <div key={i} className="loader-category-item">
 
                 {/* Icon */}
-                <div className="skeleton skeleton-category-icon"></div>
+                <div className="loader-base loader-category-icon"></div>
 
                 {/* Text */}
-                <div className="skeleton skeleton-category-text"></div>
+                <div className="loader-base loader-category-text"></div>
 
               </div>
             ))}

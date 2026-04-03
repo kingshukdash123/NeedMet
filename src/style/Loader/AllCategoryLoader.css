@@ -1,5 +1,5 @@
 /* Container */
-.category-page-loader {
+.loader-category-page {
   padding: 20px 80px;
   display: flex;
   flex-direction: column;
@@ -7,28 +7,28 @@
 }
 
 /* Section */
-.category-section {
+.loader-category-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 /* Title */
-.skeleton-category-title {
+.loader-category-title {
   width: 220px;
   height: 22px;
   border-radius: 6px;
 }
 
 /* Grid */
-.all-category-grid {
+.loader-category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 10px;
 }
 
 /* Item */
-.category-item {
+.loader-category-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,49 +36,74 @@
 }
 
 /* Icon */
-.skeleton-category-icon {
+.loader-category-icon {
   width: 64px;
   height: 64px;
   border-radius: 16px;
 }
 
 /* Text */
-.skeleton-category-text {
+.loader-category-text {
   width: 70px;
   height: 12px;
   border-radius: 6px;
 }
 
-/* ================= Skeleton Base ================= */
-.skeleton {
+/* ================= Loader Base ================= */
+.loader-base {
   background: #e5e7eb;
   border-radius: 12px;
-  animation: pulse 1.5s infinite ease-in-out;
+  animation: loader-pulse 1.5s infinite ease-in-out;
 }
 
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
+@keyframes loader-pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.5; }
   100% { opacity: 1; }
 }
 
 /* ================= Responsive ================= */
-@media (max-width: 768px) {
-  .category-page-loader {
-    padding: 20px 40px;
+@media (min-width: 481px) and (max-width: 1024px) {
+  .loader-category-page {
+    padding: 20px 32px;
+    gap: 32px;
   }
 
-  .category-grid {
-    grid-template-columns: repeat(4, 1fr);
+  .loader-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+  }
+
+  .loader-category-title {
+    width: 180px;
+    height: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .category-page-loader {
+  .loader-category-page {
     padding: 16px;
+    gap: 28px;
   }
 
-  .category-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .loader-category-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .loader-category-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .loader-category-text {
+    width: 52px;
+    height: 10px;
+  }
+
+  .loader-category-title {
+    width: 140px;
+    height: 18px;
   }
 }
