@@ -127,14 +127,22 @@ function ListingDetails() {
               <div className="views-count">({listing.views} Views)</div>
             </div>
             <div className="contact">
-              <button className='call'>
+              <a 
+                href={`tel:${listing?.phone || listing?.alternatePhone}`}
+                className='call'
+              >
                 <i className="fa-solid fa-phone"></i>
-                Call
-              </button>
-              <button className="direction">
+                {listing?.phone || listing?.alternatePhone}
+              </a>
+              <a 
+                href={`https://www.google.com/maps/dir/?api=1&destination=${listing?.geo?.lat},${listing?.geo?.lng}`}  
+                target="_blank"
+                rel="noreferrer"
+                className="direction"
+              >
                 <i className="fa-solid fa-location-arrow"></i>
                 Direction
-              </button>
+              </a>
             </div>
           </div>
 

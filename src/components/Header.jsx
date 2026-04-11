@@ -22,7 +22,7 @@ export default function Header() {
 
           <div className="header-inner-right">
             <NavLink to="/search" className="search-pill">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
             </NavLink>
             {/* NAV */}
             <nav className="nav">
